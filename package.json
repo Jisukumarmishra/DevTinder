@@ -1,0 +1,30 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "Tinder Like Platform For Developers",
+  "keywords": [
+    "fonted",
+    "backend",
+    "node.js",
+    "javascript",
+    "next.js"
+  ],
+  "homepage": "https://github.com/Jisukumarmishra/DevTinder#readme",
+  "bugs": {
+    "url": "https://github.com/Jisukumarmishra/DevTinder/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jisukumarmishra/DevTinder.git"
+  },
+  "license": "ISC",
+  "author": "Jisu",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
