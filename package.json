@@ -20,9 +20,11 @@
   "license": "ISC",
   "author": "Jisu",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+    
   },
   "dependencies": {
     "express": "^5.2.1"
