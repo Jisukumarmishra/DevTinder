@@ -1,0 +1,48 @@
+<<-- The more effort you put into planning, the less effort you need while writing code. -->>
+
+# DevTinder Features
+
+1. Create an account
+2. Log in
+3. Update your profile
+4. Feed page (Explore)
+5. Send connection request
+6. See your matches
+7. See sent and received requests
+8. Update your profile details
+
+
+# LLD
+
+1. DB Design
+
+- User collection
+
+- Connection requests
+
+2. API Degin
+
+{
+  A REST API (Representational State Transfer) is an architectural style for designing networked applications.
+  It provides a standardized way for two computer systems to communicate over the internet using the HTTP protocol
+}
+
+Http method:= get, post,  { put(full update), patch(partially update) }, delete
+
+post /signup
+post /login
+get  /profile
+post /profile
+patch /profile
+delete /profile
+
+post /sendRequest
+- action: ignore
+- action: interested
+
+post /reviewRequest
+- action: accept
+- action: reject
+
+get /requests
+get /connections
