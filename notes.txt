@@ -5,7 +5,7 @@ here ^ = is carate
 5 = major chages (happens when breaking chages are there )
 
 ^5.2.1 = means our express is automatically be updated when chaes in the 5.x.x series
-if we remove ~(we replace with tilda also in the palce of carate but that have diffrent meaning ) or carate then its never auto update
+if we remove ~(we replace with tilda also in the palce of carate but that have diffrent meaning(only patch(minor) changes) ) or carate then its never auto update
 
 
 package.lock.json = tell the exact version of the project locking on or uses 
