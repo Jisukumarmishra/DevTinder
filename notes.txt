@@ -9,3 +9,8 @@ if we remove ~(we replace with tilda also in the palce of carate but that have d
 
 
 package.lock.json = tell the exact version of the project locking on or uses 
+
+## Monggodb Database ##
+
+To Connect The Nodejs application to the the mongodb database we use thw npm library called mongoose
+npm i mongoose

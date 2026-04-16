@@ -19,7 +19,7 @@ app.get("/user", (req, res) => {
 // });
 
 // app.post("/user", (req, res) => {
-// // write the logic for the  saving data to db
+ // write the logic for the  saving data to db
 // res.send("Data successfully saved to the database");
 // });
 
