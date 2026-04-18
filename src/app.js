@@ -1,13 +1,79 @@
-const express = require('express');
+const express = require("express");
+
+const app  = express();
+
+// notes
+// app.use("/user",rH, [rH2,rh3,] rH4);
+
+
+app.get(
+  "/user",
+  (req, res, next) => {
+    console.log("Handling the route user 1!!");
+    next();
+  },
+  (req, res, next) => {
+    console.log("Handling the route user 2!!");
+    next();
+  },
+  (req, res, next) => {
+    console.log("Handling the route user 3!!");
+    next();
+  },
+  (req, res, next) => {
+    console.log("Handling the route user 4!!");
+    next();
+  },
+  (req, res) => {
+    console.log("Handling the route user 5!!");
+    res.send("5th Response!!");
+  }
+);
+
+app.listen(7000, () => {
+  console.log("Server is Succesfully Listening on port 7000");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const express = require('express');
 
 // this is create instance of the express.js application
-const app = express();
+// const app = express();
 
 
-app.get("/user", (req, res) => {
-  console.log(req.query);
-  res.send({firstname: "Jisu", lastname: "mishra keep Your prioprities First"});
-});
+// app.get("/user", (req, res) => {
+//   console.log(req.query);
+//   res.send({firstname: "Jisu", lastname: "mishra keep Your prioprities First"});
+// });
 
 // app.use("/user", (req, res)=> {
 //   res.send("HAAAAAAAAAA.......");
@@ -33,18 +99,18 @@ app.get("/user", (req, res) => {
 
 
 // this route will match all the http method API calls to /test
-app.use("/test",(req,res) =>{
-  res.send("Hellow From The Server Testing Team Hi there ");
-});
+// app.use("/test",(req,res) =>{
+//   res.send("Hellow From The Server Testing Team Hi there ");
+// });
 
-app.use("/hellow",(req,res) =>{
-  res.send("Hellow, Hellow, Hellow ........ ?");
-})
+// app.use("/hellow",(req,res) =>{
+//   res.send("Hellow, Hellow, Hellow ........ ?");
+// })
 
-app.use("/",(req,res) =>{
-  res.send("Hellow From The Server");
-})
+// app.use("/",(req,res) =>{
+//   res.send("Hellow From The Server");
+// })
 
-app.listen(3000, () => {
-  console.log("Server is SuccesFully Listening On Port 3000");
-});
+// app.listen(3000, () => {
+//   console.log("Server is SuccesFully Listening On Port 3000");
+// });
