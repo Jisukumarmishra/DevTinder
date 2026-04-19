@@ -5,30 +5,37 @@ const app  = express();
 // notes
 // app.use("/user",rH, [rH2,rh3,] rH4);
 
+app.use("/admin/getalldata", (req, res) =>{
+  // Logic For Fetching All Data
+res.send("send all data")
+});
 
-app.get(
-  "/user",
-  (req, res, next) => {
-    console.log("Handling the route user 1!!");
-    next();
-  },
-  (req, res, next) => {
-    console.log("Handling the route user 2!!");
-    next();
-  },
-  (req, res, next) => {
-    console.log("Handling the route user 3!!");
-    next();
-  },
-  (req, res, next) => {
-    console.log("Handling the route user 4!!");
-    next();
-  },
-  (req, res) => {
-    console.log("Handling the route user 5!!");
-    res.send("5th Response!!");
-  }
-);
+
+
+
+// app.get(
+//   "/user",
+//   (req, res, next) => {
+//     console.log("Handling the route user 1!!");
+//     next();
+//   },
+//   (req, res, next) => {
+//     console.log("Handling the route user 2!!");
+//     next();
+//   },
+//   (req, res, next) => {
+//     console.log("Handling the route user 3!!");
+//     next();
+//   },
+//   (req, res, next) => {
+//     console.log("Handling the route user 4!!");
+//     next();
+//   },
+//   (req, res) => {
+//     console.log("Handling the route user 5!!");
+//     res.send("5th Response!!");
+//   }
+// );
 
 app.listen(7000, () => {
   console.log("Server is Succesfully Listening on port 7000");
