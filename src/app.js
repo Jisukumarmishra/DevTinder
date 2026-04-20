@@ -2,6 +2,13 @@ const express = require("express");
 
 const app  = express();
 
+app.use("/", (err, req, res, next) => {
+if(err) {
+  // log your error
+  res.status(500).send("Something Went Wrong");
+}
+})
+
 app.get("/getUserData", (req, res) => {
   try {
   //Logic of DB Call And Get User Data
