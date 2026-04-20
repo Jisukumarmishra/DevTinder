@@ -1,17 +1,55 @@
 const express = require("express");
 
 const app  = express();
+const {adminAuth,userAuth} = require("./middlewares/auth")
+app.use("/admin", adminAuth);
+// app.use("/user",userAuth);
 
-// notes
-// app.use("/user",rH, [rH2,rh3,] rH4);
+app.post("/user/login", (req, res) => { // logically here we dont need to miidle where to authenticate
+  res.send("user logged Succesfully");
+});
 
-app.use("/admin/getalldata", (req, res) =>{
-  // Logic For Fetching All Data
-res.send("send all data")
+app.get("/user/data", userAuth, (req, res) => {// herre we need to middleware to authenticate because there is user data present
+  res.send("User Data Send")
+})
+
+app.get("/admin/getAllData", (req, res) => {
+  res.send("All Data Sent");
+});
+
+app.get("/admin/deleteUser", (req, res) => {
+  res.send("Deleted a user");
 });
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.use("/user",rH, [rH2,rh3,] rH4);
+
+// app.use("/admin/getalldata", (req, res) =>{
+//   // Logic For Fetching All Data
+// res.send("send all data")
+// });
+
+
+// below example is middleware := function taht comes middle in the chain
 
 // app.get(
 //   "/user",
