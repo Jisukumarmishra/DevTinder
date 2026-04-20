@@ -14,3 +14,20 @@ package.lock.json = tell the exact version of the project locking on or uses
 
 To Connect The Nodejs application to the the mongodb database we use thw npm library called mongoose
 npm i mongoose
+
+Route Handler = decides which function runs
+app.get('/user', ...)
+
+Request Handler = function that handles the request
+(req, res) => {
+    res.send("User data");
+}
+
+Does actual work:
+
+DB call
+Logic
+Send response
+
+
+“Route handler defines the endpoint and HTTP method, while request handler is the function executed when that route is matched.”
