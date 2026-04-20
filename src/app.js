@@ -1,25 +1,69 @@
 const express = require("express");
 
 const app  = express();
-const {adminAuth,userAuth} = require("./middlewares/auth")
-app.use("/admin", adminAuth);
-// app.use("/user",userAuth);
 
-app.post("/user/login", (req, res) => { // logically here we dont need to miidle where to authenticate
-  res.send("user logged Succesfully");
+app.get("/getUserData", (req, res) => {
+  try {
+  //Logic of DB Call And Get User Data
+   throw new error("dfjkjdjhfidhf");
+
+  res.send( "User Data Sent " );
+
+  }
+  catch (err) {
+  res.status(500).send("Some error happen contact support Team")
+  }
+
 });
 
-app.get("/user/data", userAuth, (req, res) => {// herre we need to middleware to authenticate because there is user data present
-  res.send("User Data Send")
+
+// error handleing
+app.use("/", (err, req, res, next) => {
+if(err) {
+  // log your error
+  res.status(500).send("Something Went Wrong");
+}
 })
 
-app.get("/admin/getAllData", (req, res) => {
-  res.send("All Data Sent");
-});
 
-app.get("/admin/deleteUser", (req, res) => {
-  res.send("Deleted a user");
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const {adminAuth,userAuth} = require("./middlewares/auth")
+// app.use("/admin", adminAuth);
+// // app.use("/user",userAuth);
+
+// app.post("/user/login", (req, res) => { // logically here we dont need to miidle where to authenticate
+//   res.send("user logged Succesfully");
+// });
+
+// app.get("/user/data", userAuth, (req, res) => {// herre we need to middleware to authenticate because there is user data present
+//   res.send("User Data Send")
+// })
+
+// app.get("/admin/getAllData", (req, res) => {
+//   res.send("All Data Sent");
+// });
+
+// app.get("/admin/deleteUser", (req, res) => {
+//   res.send("Deleted a user");
+// });
 
 
 
