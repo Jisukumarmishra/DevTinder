@@ -1,7 +1,6 @@
 const express = require("express");
-const { connect } = require("mongoose");
 const connectDB = require("./config/database");
-require("./config/database")
+const User = require("./models/user");
 
 const app = express() // instaces of express 
 
@@ -14,6 +13,7 @@ const user =  new User({
   password : "jisuuu@123"
 });
  await user.save();
+ res.send("user addeded succesfully ");
 });
 
 connectDB()
@@ -24,5 +24,5 @@ connectDB()
 });
 })
 .catch((err) => {
-  console.error("DataBase Canot Be Connected");
+  console.error("DataBase Canot Be Connected", err.message);
 });
