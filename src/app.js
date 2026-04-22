@@ -5,6 +5,17 @@ require("./config/database")
 
 const app = express() // instaces of express 
 
+app.post("/signup", async (req, res) => {
+// creating the new instaces of the user model
+const user =  new User({
+  firstName : "Jisu",
+  lastName : "Mishra",
+  emailId : "jisuk138@gmail.com",
+  password : "jisuuu@123"
+});
+ await user.save();
+});
+
 connectDB()
 .then(() => {
   console.log("DataBase Connecton Estbalished...");
