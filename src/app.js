@@ -4,17 +4,35 @@ const User = require("./models/user");
 
 const app = express() // instaces of express 
 
+app.use(express.json());
+
 app.post("/signup", async (req, res) => {
+  console.log(req.body); 
 // creating the new instaces of the user model
-const user =  new User({
-  firstName : "Jisu",
-  lastName : "Mishra",
-  emailId : "jisuk138@gmail.com",
-  password : "jisuuu@123"
+// const user =  new User({
+//   firstName : "Jisu",
+//   lastName : "Mishra",
+//   emailId : "jisuk138@gmail.com",
+//   password : "jisuuu@123"
+// });
+
+//   const user = new User ({
+//     firstName : "Harsh",
+//     lastName  : "Mishra",
+//     emailId : "harsh@gmail.com",
+//     passWord : "Harsh@123"
+//   })
+
+// try {
+//  await user.save();
+//  res.send("user addeded succesfully ");
+// }
+// catch (err) {
+//   res.status(400).send("Error saving the user :"+ err.message);
+// }
 });
- await user.save();
- res.send("user addeded succesfully ");
-});
+
+
 
 connectDB()
 .then(() => {
