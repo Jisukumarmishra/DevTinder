@@ -22,6 +22,8 @@ catch (err) {
 
 });
 
+
+
 // make an api to get the one user data from the database
 //get user by email
 app.get("/user", async (req, res) => {
@@ -43,8 +45,18 @@ app.get("/user", async (req, res) => {
   
 })
 
+
 // feed api - GET/feed - get all teh user from the database
-app.get("/feed",(req, res)=> {
+app.get("/feed", async(req, res)=> {
+  try {
+    const users = await User.find({});
+    res.send(users);
+
+  } 
+  catch (err) {
+    console.log(err);
+    res.status(400).send("Error" + err.message);
+  }
 
 });
 
