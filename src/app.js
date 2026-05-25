@@ -22,6 +22,27 @@ catch (err) {
 
 });
 
+// make an api to get the one user data from the database
+//get user by email
+app.get("/user", async (req, res) => {
+  const userEmail = req.body.emailId; // reading the body of the email id from the email that you getting
+
+  try {
+  const user = await User.find({emailId:userEmail}); // finding the user from the database
+  res.send(user); // sendint the user back
+  }
+
+  catch (err) {
+    res.status(400).send("Something Went Wrong")
+  }
+  
+})
+
+// feed api - GET/feed - get all teh user from the database
+app.get("/feed",(req, res)=> {
+
+});
+
 
 
 connectDB()
