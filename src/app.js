@@ -28,8 +28,13 @@ app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId; // reading the body of the email id from the email that you getting
 
   try {
-  const user = await User.find({emailId:userEmail}); // finding the user from the database
-  res.send(user); // sendint the user back
+  const users = await User.find({emailId:userEmail}); // finding the user from the database
+  if(users.length === 0) {
+    res.status(404).send("User not Found")
+  } else  {
+    res.send(users)
+  }
+  // res.send(user); // sendint the user back
   }
 
   catch (err) {
