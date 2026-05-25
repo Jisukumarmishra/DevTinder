@@ -10,10 +10,20 @@ if we remove ~(we replace with tilda also in the palce of carate but that have d
 
 package.lock.json = tell the exact version of the project locking on or uses 
 
+
+
+
+
 ## Monggodb Database ##
 
 To Connect The Nodejs application to the the mongodb database we use thw npm library called mongoose
 npm i mongoose
+
+
+
+
+
+
 
 Route Handler = decides which function runs
 app.get('/user', ...)
@@ -33,6 +43,13 @@ middleware is needed one of the reason is to autenticate the user cofidentatial 
 
 
 “Route handler defines the endpoint and HTTP method, while request handler is the function executed when that route is matched.”
+
+
+
+
+
+
+
 
 
 ## Connection To The DataBAse:=
