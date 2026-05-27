@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/database");
 const User = require("./models/user");
+const user = require("./models/user");
 
 const app = express() // instaces of express 
 
@@ -30,20 +31,36 @@ app.get("/user", async (req, res) => {
   const userEmail = req.body.emailId; // reading the body of the email id from the email that you getting
 
   try {
-  const users = await User.find({emailId:userEmail}); // finding the user from the database
-  if(users.length === 0) {
-    res.status(404).send("User not Found")
-  } else  {
-    res.send(users)
+    console.log(userEmail)
+  const user = await User.findOne({ emailId : userEmail});
+  if(!user) {
+    res.status(404).send("user Not Found")
+  } else {
+    res.send(user);
   }
-  // res.send(user); // sendint the user back
+  } 
+  catch (err) {
+
   }
 
-  catch (err) {
-    res.status(400).send("Something Went Wrong")
-  }
+  // try {
+  // const users = await User.find({emailId:userEmail}); // finding the user from the database
+  // if(users.length === 0) {
+  //   res.status(404).send("User not Found")
+  // } else  {
+  //   res.send(users)
+  // }
+  // // res.send(user); // sendint the user back
+  // }
+
+  // catch (err) {
+  //   res.status(400).send("Something Went Wrong")
+  // }
   
 })
+
+
+
 
 
 // feed api - GET/feed - get all teh user from the database
@@ -59,6 +76,27 @@ app.get("/feed", async(req, res)=> {
   }
 
 });
+
+
+//api get user by id 
+app.get("/:id", async (req,res) => { //"/user/:id"(for params -> :)
+  try {
+  const id = await User.findById(req.params.id)
+  console.log(id);
+   if(!id) {
+      res.status(404).send("Id not found")
+    } else {
+      res.send(id)
+    } 
+  } 
+  catch (err) {
+   res.status(400).send("Invalid_ID")
+  }
+});
+
+
+
+
 
 
 
