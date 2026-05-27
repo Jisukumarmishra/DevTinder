@@ -79,26 +79,26 @@ app.get("/feed", async(req, res)=> {
 
 
 //api get user by id 
-app.get("/:id", async (req,res) => { //"/user/:id"(for params -> :)
-  try {
-  const id = await User.findById(req.params.id)
-  console.log(id);
-   if(!id) {
-      res.status(404).send("Id not found")
-    } else {
-      res.send(id)
-    } 
-  } 
-  catch (err) {
-   res.status(400).send("Invalid_ID")
-  }
-});
+// app.get("/:id", async (req,res) => { //"/user/:id"(for params -> :)
+//   try {
+//   const id = await User.findById(req.params.id)
+//   console.log(id);
+//    if(!id) {
+//       res.status(404).send("Id not found")
+//     } else {
+//       res.send(id)
+//     } 
+//   } 
+//   catch (err) {
+//    res.status(400).send("Invalid_ID")
+//   }
+// });
 
 
 
 
 
-
+// delete the user form the database
 app.delete("/user", async (req, res) => {
   const userId = req.body.userId; // read the body
   try {
@@ -107,6 +107,21 @@ app.delete("/user", async (req, res) => {
   res.send("User Deleted Succesfully")
   } catch (err) {
     req.status(400).send("Something Went Wrong")
+  }
+})
+
+
+
+//Update Data of The USer
+app.patch("/user", async (req, res) => {
+ const userId = req.body.userId;
+ const data = req.body// read the request
+  try {
+  await User.findByIdAndUpdate({_id: userId}, data)
+  res.send("User Updated SuccesFully")
+  }
+  catch (err) {
+ res.status(400).send("Something Went Wrong")
   }
 })
 
