@@ -94,11 +94,17 @@ app.get("/:id", async (req,res) => { //"/user/:id"(for params -> :)
   }
 });
 
+
+
+
+
+
 app.delete("/user", async (req, res) => {
   const userId = req.body.userId; // read the body
   try {
-  // const user = await User.findByIdAndUpdate( {_id : userId })
-  const user = await User.findByIdAndDelete(userId)
+   const user = await User.findByIdAndUpdate( {_id : userId })
+  // const user = await User.findByIdAndDelete(userId)
+  res.send("User Deleted Succesfully")
   } catch (err) {
     req.status(400).send("Something Went Wrong")
   }
