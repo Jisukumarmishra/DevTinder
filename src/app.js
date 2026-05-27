@@ -118,7 +118,10 @@ app.patch("/user", async (req, res) => {
  const data = req.body// read the request
  console.log(data)
   try {
-  await User.findByIdAndUpdate({_id: userId}, data)
+  await User.findByIdAndUpdate({_id: userId}, data, {
+    returnDocument: "before" // by default before hi rahta hai
+  });
+  console.log(user)
   res.send("User Updated SuccesFully")
   }
   catch (err) {
