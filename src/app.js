@@ -113,12 +113,16 @@ app.delete("/user", async (req, res) => {
 
 
 //Update Data of The USer
-app.patch("/user", async (req, res) => {
- const userId = req.body.userId;
+app.patch("/user/:userId", async (req, res) => {
+ const userId = req.params?.userId;
  const data = req.body// read the request
 
- const ALLOWED_UPDATES = [
-  "photoUrl", "about", "gender", "age"
+  try {
+  const ALLOWED_UPDATES = [
+  "photoUrl",
+  "about",
+  "gender",
+  "age"
  ]
 
  const isUpdateAllowed = Object.keys(data).every((k) => 
@@ -126,9 +130,9 @@ app.patch("/user", async (req, res) => {
  );
  
  if(!isUpdateAllowed){
-  res.status(400).send("Update Is Not Allowed")
+  throw new Error ("Update Is Not Allowed")
  }
-  try {
+
   const user = await User.findByIdAndUpdate({_id: userId}, data, {
     returnDocument: "before", // by default before hi rahta hai
     runValidators : true
