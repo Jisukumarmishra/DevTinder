@@ -116,6 +116,18 @@ app.delete("/user", async (req, res) => {
 app.patch("/user", async (req, res) => {
  const userId = req.body.userId;
  const data = req.body// read the request
+
+ const ALLOWED_UPDATES = [
+  "photoUrl", "about", "gender", "age"
+ ]
+
+ const isUpdateAllowed = Object.keys(data).every((k) => 
+ ALLOWED_UPDATES.includes(k)
+ );
+ 
+ if(!isUpdateAllowed){
+  res.status(400).send("Update Is Not Allowed")
+ }
   try {
   const user = await User.findByIdAndUpdate({_id: userId}, data, {
     returnDocument: "before", // by default before hi rahta hai
