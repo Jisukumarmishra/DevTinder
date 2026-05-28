@@ -29,33 +29,50 @@ const userSchema = new mongoose.Schema({
 
   passWord : {
     type : String,
-    required : true
+    required : true,
+    validate(value) {
+     if (!validator.isStrongPassword(value)){
+      throw new Error("Enter A Strong passWord G@n.... Nhi To Hack Ho Jayega" + value)
+     }
+    },
   },
 
   age : {
     type : Number,
     min : 18
   },
+
+
   gender : {
     type : String,
     validate(value) {
       if(!["male", "female", "others"].includes(value)) {
         throw new Error ("Gender Data Is Not Valid")
       }
-    }
+    },
   },
+
+
   photoUrl : {
     type : String,
-    default : "Some Url"
+    default : "Some Url",
+    validate(value) {
+     if (!validator.isURL(value)){
+      throw new Error("Invalid URL Address" + value)
+     }
+    },
   },
+
+
   about:  {
     type: String,
     default: "This Is a Default About A User"
   },
+
+
   skills: {
     type : [String]
   }
-
 
 },{
   timestamps : true
