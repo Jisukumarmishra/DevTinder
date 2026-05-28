@@ -7,12 +7,13 @@ const app = express() // instaces of express
 
 app.use(express.json());
 
+
+
+
+
 app.post("/signup", async (req, res) => {
 // creating the new instaces of the user model
 const user =  new User(req.body);
-
-console.log(req.body);
-
 try {
  await user.save();
  res.send("user addeded succesfully ");
@@ -58,7 +59,6 @@ app.get("/user", async (req, res) => {
   // }
   
 })
-
 
 
 
@@ -118,13 +118,14 @@ app.patch("/user", async (req, res) => {
  const data = req.body// read the request
   try {
   const user = await User.findByIdAndUpdate({_id: userId}, data, {
-    returnDocument: "before" // by default before hi rahta hai
+    returnDocument: "before", // by default before hi rahta hai
+    runValidators : true
   });
   console.log(user)
   res.send(user)
   }
   catch (err) {
- res.status(400).send("Something Went Wrong")
+ res.status(400).send("Update Failed" + err.message)
   }
 })
 
