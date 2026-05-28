@@ -133,6 +133,10 @@ app.patch("/user/:userId", async (req, res) => {
   throw new Error ("Update Is Not Allowed")
  }
 
+ if(data?.skills.length > 10) {
+  throw new Error("Skills Cant Be More Than 10")
+ }
+
   const user = await User.findByIdAndUpdate({_id: userId}, data, {
     returnDocument: "before", // by default before hi rahta hai
     runValidators : true
