@@ -101,6 +101,7 @@ app.get("/feed", async(req, res)=> {
 // delete the user form the database
 app.delete("/user", async (req, res) => {
   const userId = req.body.userId; // read the body
+  // also important fact chek:= Never Trust req.body 
   try {
    const user = await User.findByIdAndUpdate( {_id : userId })
   // const user = await User.findByIdAndDelete(userId)
