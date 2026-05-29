@@ -3,6 +3,7 @@ const connectDB = require("./config/database");
 const User = require("./models/user");
 const user = require("./models/user");
 const {validateSignUpData} = require("./utils/validation")
+const bcrypt = require("bcrypt")
 
 const app = express() // instaces of express 
 
@@ -18,11 +19,19 @@ app.post("/signup", async (req, res) => {
 
 // validation of data
 validateSignUpData(req)
+const {firstName, lastName, passWord, emailId } = req.body
 
 // Encrypt The Password
+const passwordHash = await bcrypt.hash(passWord,10);
+console.log(passwordHash);
 
 // creating the new instaces of the user model
-const user =  new User(req.body);
+const user =  new User({
+  firstName,
+  lastName,
+  emailId,
+  passWord: passwordHash
+});
 
  await user.save();
  res.send("user addeded succesfully ");
