@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
 
   photoUrl : {
     type : String,
-    default : "Some Url",
+    default : "https://example.com/photo.jpg",
     validate(value) {
      if (!validator.isURL(value)){
       throw new Error("Invalid URL Address" + value)
