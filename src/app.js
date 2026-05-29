@@ -169,6 +169,21 @@ app.patch("/user/:userId", async (req, res) => {
 })
 
 
+// api for the login
+app.post("/login", async (req, res) => {
+ try {
+ const {emailId, passWord} = req.body;
+ if(!validator.isEmail(emailId)) {
+  throw new Error ("Invalid Email ID")
+ } else {
+  res.send("Login Validation successful")
+ }
+ }
+ catch (err) {
+  res.status(400).send("Error : " + err.message);
+ }
+
+})
 
 
 
