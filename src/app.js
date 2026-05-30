@@ -219,11 +219,21 @@ app.get("/profile", async (req,res) => {
   const cookies = req.cookies;
 
   const {token} = cookies;
+  if(!token) {
+    throw new Error("Invalid Crendentials")
+  }
+  const decodeMessage = await jwt.verify(token, "Dev@Tinder$120");
+  const {_id} = decodeMessage;
+  // console.log("Logged USer is : " + _id);
 
+  const user = await User.findById(_id);
+  if(!user) {
+    throw new Error("User Doesnt Found")
+  }
 
   //validate the cookies
-  console.log(cookies);
-  res.send("Reading Cookies");
+  // console.log(cookies);
+  res.send(user);
   }
   catch (err) {
     res.status(400).send("Error" + err.message);
