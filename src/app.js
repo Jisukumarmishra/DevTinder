@@ -3,7 +3,9 @@ const connectDB = require("./config/database");
 const User = require("./models/user");
 const user = require("./models/user");
 const {validateSignUpData} = require("./utils/validation")
+const validator = require("validator");
 const bcrypt = require("bcrypt")
+
 
 const app = express() // instaces of express 
 
@@ -172,12 +174,34 @@ app.patch("/user/:userId", async (req, res) => {
 // api for the login
 app.post("/login", async (req, res) => {
  try {
+
  const {emailId, passWord} = req.body;
+ // emailId Validations
  if(!validator.isEmail(emailId)) {
   throw new Error ("Invalid Email ID")
- } else {
-  res.send("Login Validation successful")
  }
+ 
+ const user = await User.findOne({emailId: emailId});
+ if(!user) {
+  throw new Error("Invalid Credentials")
+ }
+
+ const isPassWordValid = await bcrypt.compare(passWord, user.passWord);
+
+ if(isPassWordValid) {
+  // create a jwt token
+
+
+  // add the token to cokkies and send the response back to the user
+  res.cookie("token", "dfpoeofwfdsfn3i2032jdsfjdsfkdfkdjdskfj[fkdsofiweir0-3rikfd0-rieedkdjldfkdopf");
+  res.send("login successfully!!!")
+ } else {
+  throw new Error("Invalid Credentials")
+ }
+
+
+
+
  }
  catch (err) {
   res.status(400).send("Error : " + err.message);
