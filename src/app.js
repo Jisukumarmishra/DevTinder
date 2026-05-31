@@ -7,6 +7,7 @@ const validator = require("validator");
 const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 
 const app = express() // instaces of express 
@@ -194,7 +195,7 @@ app.post("/login", async (req, res) => {
  if(isPassWordValid) {
   // create a jwt token
 
-  const token = await jwt.sign({_id: user._id}, "Dev@Tinder$120");
+  const token = await jwt.sign({_id: user._id}, process.env.JWT_SECRET);
 
   // add the token to cokkies and send the response back to the user
   res.cookie("token", token);
@@ -222,7 +223,7 @@ app.get("/profile", async (req,res) => {
   if(!token) {
     throw new Error("Invalid Crendentials")
   }
-  const decodeMessage = await jwt.verify(token, "Dev@Tinder$120");
+  const decodeMessage = await jwt.verify(token, process.env.JWT_SECRET);
   const {_id} = decodeMessage;
   // console.log("Logged USer is : " + _id);
 
