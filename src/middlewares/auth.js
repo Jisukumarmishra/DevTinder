@@ -1,29 +1,41 @@
-// Handle auth middleware for all /admin requests
-const adminAuth =  (req, res, next) => {
-  console.log("Admin auth is getting checked!!");
-  const token = "xyz";
-  const isAdminAuthorized = token === "xyz";
+ // Handle auth middleware for all /admin requests
+// const adminAuth =  (req, res, next) => {
+//   console.log("Admin auth is getting checked!!");
+//   const token = "xyz";
+//   const isAdminAuthorized = token === "xyz";
 
-  if (!isAdminAuthorized) {
-    res.status(401).send("Unauthorized request");
-  } else {
-    next();
-  }
-};
+//   if (!isAdminAuthorized) {
+//     res.status(401).send("Unauthorized request");
+//   } else {
+//     next();
+//   }
+// };
 
-const userAuth =  (req, res, next) => {
-  console.log("User auth is getting checked!!");
-  const token = "xz";
-  const isAdminAuthorized = token === "xyz";
+// const userAuth =  (req, res, next) => {
+//   console.log("User auth is getting checked!!");
+//   const token = "xz";
+//   const isAdminAuthorized = token === "xyz";
 
-  if (!isAdminAuthorized) {
-    res.status(401).send("Unauthorized request");
-  } else {
-    next();
-  }
-};
+//   if (!isAdminAuthorized) {
+//     res.status(401).send("Unauthorized request");
+//   } else {
+//     next();
+//   }
+// };
+
+// module.exports = {
+//   adminAuth,  
+//   userAuth,
+// }
+
+const userAuth = (req, res, next) => {
+  // read the token from the request cookies
+  //validate the token 
+  //find the user  
+
+}
 
 module.exports = {
-  adminAuth,  
   userAuth,
 }
+
