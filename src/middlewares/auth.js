@@ -40,6 +40,9 @@ const userAuth = async (req, res, next) => {
 
   try {
   const {token} = req.cookies; // reading the token from cookies
+  if(!token) {
+    throw new Error("Token Is Not Valid");
+  }
   const decodeobj = await jwt.verify(token, process.env.JWT_SECRET); // validate token
   const {_id} = decodeobj; // extracting _id
 
@@ -47,11 +50,12 @@ const userAuth = async (req, res, next) => {
   if(!user) {
     throw new Error ("User Is Not Found");
   }
+  req.user = user;
   next()
 
   }
   catch (err) {
- res.status(400).send("ERROR" + err.message);
+ res.status(400).send("ERROR: " + err.message);
   }
 }
 

@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const {userAuth} = require("./middlewares/auth");
 
 
 const app = express() // instaces of express 
@@ -195,7 +196,7 @@ app.post("/login", async (req, res) => {
  if(isPassWordValid) {
   // create a jwt token
 
-  const token = await jwt.sign({_id: user._id}, process.env.JWT_SECRET);
+  const token = await jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: "0d"});
 
   // add the token to cokkies and send the response back to the user
   res.cookie("token", token);
@@ -215,25 +216,9 @@ app.post("/login", async (req, res) => {
 })
 
 
-app.get("/profile", async (req,res) => {
+app.get("/profile",userAuth, async (req,res) => {
   try {
-  const cookies = req.cookies;
-
-  const {token} = cookies;
-  if(!token) {
-    throw new Error("Invalid Crendentials")
-  }
-  const decodeMessage = await jwt.verify(token, process.env.JWT_SECRET);
-  const {_id} = decodeMessage;
-  // console.log("Logged USer is : " + _id);
-
-  const user = await User.findById(_id);
-  if(!user) {
-    throw new Error("User Doesnt Found")
-  }
-
-  //validate the cookies
-  // console.log(cookies);
+  const user = req.user;
   res.send(user);
   }
   catch (err) {
