@@ -78,6 +78,12 @@ const userSchema = new mongoose.Schema({
   timestamps : true
 });
 
+userSchema.method.getJWT = async function () {
+  const user = this // this is never working if we use arrow function due to internal implementations of arrow fumctions
+  const token = await jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: "7d"});
+  return token; 
+}
+
 // const User = mongoose.model("user", userSchema);
 // module.exports = User;  
 
