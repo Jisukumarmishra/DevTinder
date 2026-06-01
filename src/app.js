@@ -191,7 +191,7 @@ app.post("/login", async (req, res) => {
   throw new Error("Invalid Credentials")
  }
 
- const isPassWordValid = await bcrypt.compare(passWord, user.passWord);
+ const isPassWordValid = await user.validatePassword(passWord);
 
  if(isPassWordValid) {
   // create a jwt token
