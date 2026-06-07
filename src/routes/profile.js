@@ -3,7 +3,7 @@ const { userAuth } = require('../middlewares/auth');
 const profileRouter = express.Router();
 
 
-profileRouter.get("/profile",userAuth, async (req,res) => {
+profileRouter.get("/profile/view",userAuth, async (req,res) => {
   try {
   const user = req.user;
   res.send(user);
@@ -13,4 +13,13 @@ profileRouter.get("/profile",userAuth, async (req,res) => {
   }
 });
 
+
+profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
+try {
+validateEditProfileData(req);
+}
+catch (err) {
+  res.status(400).send("EROR : " + err.message);
+}
+});
 module.exports = profileRouter;
