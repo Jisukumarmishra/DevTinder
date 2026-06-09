@@ -16,7 +16,16 @@ profileRouter.get("/profile/view",userAuth, async (req,res) => {
 
 profileRouter.patch("/profile/edit", userAuth, async(req, res) => {
 try {
-validateEditProfileData(req);
+if(!validateEditProfileData(req)) {
+  throw new Error("Invalid Edit Request!!");
+  // or return res.status(400).send()
+
+  const loggedInUser = req.user;
+  // loggedInUser.firstName = req.body.firstName; or
+  Object.keys(req.body).forEach((key) => (loggedInUser[key]= req.body[key]));
+  await loggedInUser.save();
+  res.send(`${loggedInUser.firstName} Your Profile is Updated SuccessFully`);
+}
 }
 catch (err) {
   res.status(400).send("EROR : " + err.message);
