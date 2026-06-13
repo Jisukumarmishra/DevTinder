@@ -21,10 +21,11 @@ return isEditAllowed;
 
 const validateEditForgetpassword = (req) => {
   const allowEditFields = ["passWord"];
-  const isEditAllowed = Object.keys(req.body).every((field) => {
-   return allowEditFields.includes(field)
+  return Object.keys(req.body).every((field) => {
+  console.log(field);
+  console.log(allowEditFields.includes(field));
+  return allowEditFields.includes(field)
   });
-  // return isEditAllowed;
 }
 
 module.exports = {

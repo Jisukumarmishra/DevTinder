@@ -1,9 +1,10 @@
 const express = require('express');
 const { userAuth } = require('../middlewares/auth');
-const { validate } = require('../models/user');
+const { validate, passWord } = require('../models/user');
 const validator = require("validator");
 const {validateEditProfileData, validateEditForgetpassword } = require("../utils/validation");
 const profileRouter = express.Router();
+const bcrypt = require("bcrypt");
 
 
 profileRouter.get("/profile/view",userAuth, async (req,res) => {
@@ -51,20 +52,20 @@ profileRouter.patch("/profile/password", userAuth, async (req, res ) => {
     
    const {password} = req.body;
 
-   if(!validator.isStrongPassword(passWord)){
+   if(!validator.isStrongPassword(req.body.passWord)){
     throw new Error("Add Strong Password");
   }
 
-    const loggedInuser = req.user;
-    const hashedPassword = await bcrypt.hash(passWord, 10);
+    const loggedInUser = req.user;
+    const hashedPassword = await bcrypt.hash(req.body.passWord, 10);
 
     loggedInUser.passWord = hashedPassword;
 
     // Object.keys(req.body).forEach((key) => loggedInuser[key]= req.body[key]);
-    await loggedInuser.save();
+    await loggedInUser.save();
     res.json({
-      message : `${loggedInuser.firstName}, Your Password Updated Successfully`,
-      data : loggedInuser,
+      message : `${loggedInUser.firstName}, Your Password Updated Successfully`,
+      data : loggedInUser,
     });
 
   } 
