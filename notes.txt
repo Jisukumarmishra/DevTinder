@@ -41,6 +41,11 @@ Send response
 
 middleware is needed one of the reason is to autenticate the user cofidentatial data, code readiblity
 
+What userAuth does:-->
+1.Reads JWT token from cookie.
+2.Verifies token.
+3.Finds user from DB.
+4.Stores user in:
 
 “Route handler defines the endpoint and HTTP method, while request handler is the function executed when that route is matched.”
 
