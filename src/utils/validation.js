@@ -17,8 +17,19 @@ const isEditAllowed = Object.keys(req.body).every((field) => {
   allowEditFields.includes(field)
 });
 return isEditAllowed;
+};
+
+const validateEditForgetpassword = (req) => {
+  const allowEditFields = ["passWord"];
+  const isEditAllowed = Object.keys(req.body).every((field) => {
+   return allowEditFields.includes(field)
+  });
+  // return isEditAllowed;
 }
 
 module.exports = {
   validateSignUpData,
+  validateEditProfileData,
+  validateEditForgetpassword,
+  
 }
