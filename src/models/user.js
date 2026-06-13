@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require("validator");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
-
+// User Model Define The Ideantity Of The User
 const userSchema = new mongoose.Schema({
 
   firstName: {
