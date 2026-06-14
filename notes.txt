@@ -60,3 +60,6 @@ What userAuth does:-->
 ## Connection To The DataBAse:=
 
 Right Process Is connect To The DataBase Then Listening To The Server
+
+Note:==
+--Creating enum to restrict for the some value
