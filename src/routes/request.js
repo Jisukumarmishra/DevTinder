@@ -10,6 +10,7 @@ requestRouter.post("/sendConnectionRequest", userAuth, async(req, res) => {
   res.send(user.firstName +  "sent the connection request");
 });
 
+
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
   const fromUserId = req.user._id;
@@ -20,6 +21,24 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
   if(!allowedStatus.includes(status)) {
     return res.status(400).json({message :"Invalid Status Type: "} + status);
   } 
+
+  const toUser = await User.findById(toUserId);
+  if(!toUser) {
+    return res.status(404).json({ message : "User Not Found "});
+  }
+
+  const existingConnectionRequest = await ConnectionRequest.findOne({
+    $or :[
+      {fromUserId : toUserId},
+      {fromUserId : toUserId, toUserId : fromUserId},
+    ],
+  });
+
+  if(existingConnectionRequest) {
+    return res
+    .status(400)
+    .send({message : "Connection Request Already Exists !!!"})
+  }
  
   //creating a instances of the ConnectionRequest model
   const connectionRequest = new ConnectionRequest({

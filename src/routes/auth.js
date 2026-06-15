@@ -16,7 +16,6 @@ const {firstName, lastName, passWord, emailId } = req.body
 
 // Encrypt The Password
 const passwordHash = await bcrypt.hash(passWord,10);
-console.log(passwordHash);
 
 // creating the new instaces of the user model
 const user =  new User({
