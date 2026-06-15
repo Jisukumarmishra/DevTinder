@@ -2,6 +2,8 @@ const express = require('express');
 const { userAuth } = require('../middlewares/auth');
 const ConnectionRequest = require('../models/connectionRequest');
 const requestRouter = express.Router();
+const User  = require("../models/user");
+
 
 requestRouter.post("/sendConnectionRequest", userAuth, async(req, res) => {
   const user = req.user;
@@ -51,7 +53,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
   const data = await connectionRequest.save();
 
   res.json({
-  message : "Connection Request Send Succeffuly ",
+  message :req.user.firstName + " is " + status + " in " + toUser.firstName,
   data,
   });
 
