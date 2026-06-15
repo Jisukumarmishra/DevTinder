@@ -51,15 +51,41 @@ What userAuth does:-->
 
 
 
-
-
-
-
-
-
 ## Connection To The DataBAse:=
 
 Right Process Is connect To The DataBase Then Listening To The Server
 
 Note:==
 --Creating enum to restrict for the some value
+
+
+MOngoDb Is The Actual DataBase
+
+Mongoose is a Node.js library that makes working with MongoDB easier.
+npm install mongoose
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+    firstName: String,
+    age: Number
+});
+
+const User = mongoose.model("User", userSchema);
+
+
+| MongoDB                   | Mongoose                                   |
+| ------------------------- | ------------------------------------------ |
+| Database                  | ODM (Object Data Modeling) library         |
+| Stores data               | Helps Node.js interact with MongoDB        |
+| Runs as a separate server | Runs inside your Node.js application       |
+| No schema required        | Supports schemas and validation            |
+| Created by MongoDB Inc.   | JavaScript library built on top of MongoDB |
+
+
+Indexes In MongoDb:==
+Indexes are special data structures that help the database find records quickly without scanning the entire table or collection.
+They improve read, search, filtering, sorting, and join performance. However, indexes consume extra storage and make insert, update,
+and delete operations slower because the index must also be maintained
+
+
+
