@@ -63,12 +63,47 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
   }
 });
 
+
 requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
-  try {
+
+try {
+
  const loggedInUser = req.user;
- // validate the sataus
+
+ const allowedStatus = ["accepted", "rejected"];
+ const {status, requestId } = req.params;
+
+ if(!allowedStatus.includes(status)) {
+  return res.status(403).json({
+    message : "Status Not Allowed",
+  });
+ }
+
+ const connectionRequest = await ConnectionRequest.findOne({
+  _id: requestId,
+  toUserId: loggedInUser._id,
+  status: "interested" 
+ });
+
+ if(!connectionRequest) {
+  res.status(404).json({
+    message : "Connection Request Not Found",
+  });
+ }
+
+
+ connectionRequest.status = status; // modify The status
+
+ const data = await connectionRequest.save();  // now save To Change The status
+ res.json({
+  message : "Connection Request " + status, data
+ })
+
+
+
+ // validate the sataus and RequestId
  // jisu --> FocusJisu
- // FocusJisu Should Be logIn
+ // FocusJisu Should Be logIn (loggedInId == UserID)
  // status should be interested tabho to vo connection request beja hoga 
  // reqId SHould Be valid (means reqId should be present in the out database)
 
