@@ -50,7 +50,9 @@ const userAuth = async (req, res, next) => {
   if(!user) {
     throw new Error ("User Is Not Found");
   }
+
   req.user = user;
+  
   next()
 
   }
