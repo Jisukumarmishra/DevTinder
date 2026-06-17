@@ -66,8 +66,13 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
   try {
  const loggedInUser = req.user;
+ // validate the sataus
+ // jisu --> FocusJisu
+ // FocusJisu Should Be logIn
+ // status should be interested tabho to vo connection request beja hoga 
+ // reqId SHould Be valid (means reqId should be present in the out database)
 
- 
+
   } 
   catch (err) {
  res.status(400).send("ERROR : " + err.message);
