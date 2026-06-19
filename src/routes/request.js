@@ -15,7 +15,7 @@ requestRouter.post("/sendConnectionRequest", userAuth, async(req, res) => {
 
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
-  const fromUserId = req.user._id;
+   const fromUserId = req.user._id;
   const toUserId = req.params.toUserId;
   const status = req.params.status
   
@@ -86,7 +86,7 @@ try {
  });
 
  if(!connectionRequest) {
-  res.status(404).json({
+ return res.status(404).json({
     message : "Connection Request Not Found",
   });
  }
