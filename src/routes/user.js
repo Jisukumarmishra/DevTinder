@@ -3,6 +3,7 @@ const { userAuth } = require('../middlewares/auth');
 const ConnectionRequestModel = require('../models/connectionRequest');
 const userRouter = express.Router();
 
+
 // get the all pending connections requests for the loggedInUser
 userRouter.get("/user/requests/received", userAuth, async (req, res ) => {
   try {
@@ -25,5 +26,18 @@ userRouter.get("/user/requests/received", userAuth, async (req, res ) => {
     res.status(400).send("ERROR : " + err.message );
   }
 });
+
+
+
+userRouter.get("/user/connections", userAuth, async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+
+  }
+  catch (err) {
+    res.status(400).send("ERROR : " + err.message);
+  }
+});
+
 
 module.exports = userRouter;
