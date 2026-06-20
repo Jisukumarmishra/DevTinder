@@ -7,11 +7,12 @@ const userRouter = express.Router();
 userRouter.get("/user/requests/received", userAuth, async (req, res ) => {
   try {
     const loggedInUser = req.user;
+
     const connectionRequests = await ConnectionRequestModel.find({
       toUserId : loggedInUser._id,
       // status pending
       status : "interested"
-    })
+    }).populate("fromUserId", ["firstName", "lastName"]);
 
     res.json({
       message : "data fetched successfully",
