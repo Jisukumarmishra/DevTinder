@@ -12,7 +12,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res ) => {
       toUserId : loggedInUser._id,
       // status pending
       status : "interested"
-    }).populate("fromUserId", "firstName lastName");
+    }).populate("fromUserId", "firstName lastName photUrl age gender about skills ");
     // }).populate("fromUserId", ["firstName", "lastName"]);
 
     res.json({

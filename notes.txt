@@ -88,4 +88,7 @@ They improve read, search, filtering, sorting, and join performance. However, in
 and delete operations slower because the index must also be maintained
 
 
+read about ref and populate in mongodb (Query Populations)
+
+
 
