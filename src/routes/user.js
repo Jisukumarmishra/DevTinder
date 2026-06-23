@@ -82,7 +82,10 @@ userRouter.get("/user/feed",userAuth, async (req, res) => {
     console.log(hideusersFormFeed);
 
     const users = await User.find({
-      _id : { $nin : Array.from(hideusersFormFeed)},
+      $and : [
+      {_id : { $nin : Array.from(hideusersFormFeed)}},
+      {_id : { $ne : loggedInUser._id}},
+      ],
     });
 
     // const connectionsPendings =
