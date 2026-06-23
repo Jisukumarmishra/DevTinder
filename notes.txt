@@ -102,6 +102,8 @@ Paginations:=
 .skip() means = How many Document You Skip From The First
 .limit() measn = How Mnay Document You Want
 
+skip = (page-1) * limit
+
 
 
 
