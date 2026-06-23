@@ -88,7 +88,7 @@ userRouter.get("/user/feed",userAuth, async (req, res) => {
       {_id : { $nin : Array.from(hideusersFormFeed)}},
       {_id : { $ne : loggedInUser._id}},
       ],
-    });
+    }).select(USER_SAFE_DATA);
 
     res.send(users);
 
