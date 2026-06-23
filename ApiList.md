@@ -1,18 +1,18 @@
 # DevTinder APIs
 
-authRouter
+# authRouter
 Post /SignUp
 Post /LogIn
 Post /LogOutgit
 
 
-profileRouter
+# profileRouter
 Get /Profile/View
 Patch/Profile/edit
 Patch /Profile/Password
 
 
-ConnecctionsRequestRouter
+# ConnecctionsRequestRouter
 <!-- Post /request/send/interested/:userId
 Post /request/send/ignored/:userId -->
 

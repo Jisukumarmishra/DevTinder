@@ -2,6 +2,7 @@ const express = require('express');
 const { userAuth } = require('../middlewares/auth');
 const ConnectionRequestModel = require('../models/connectionRequest');
 const userRouter = express.Router();
+const User = require('../models/user')
 
 const USER_SAFE_DATA = "firstName lastName photoUrl age gender about skills"
 
@@ -42,7 +43,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
       ],
     })
     .populate("fromUserId", USER_SAFE_DATA)
-    .populate("touserId:, USER_SAFE_DATA");
+    .populate("toUserId", USER_SAFE_DATA);
 
     const data = connectionRequests.map((row) => {
       if(row.fromUserId._id.toString() === loggedInUser._id.toString()) {
@@ -51,9 +52,9 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
       return row.fromUserId;
     })
 
-    res.json({ data: connectionRequests});
+    // res.json({ data: connectionRequests});
 
-    const data = connectionRequests.map((row) => row.fromUserId );
+    // const data = connectionRequests.map((row) => row.fromUserId );
     res.json({data});
 
   }
@@ -61,6 +62,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
     res.status(400).send("ERROR : " + err.message);
   }
 });
+
 
 userRouter.get("/user/feed",userAuth, async (req, res) => {
   try {
@@ -72,11 +74,11 @@ userRouter.get("/user/feed",userAuth, async (req, res) => {
         {fromUserId : loggedInUser._id},
         {toUserId : loggedInUser._id},
       ]
-    }.select("fromUserid toUserId"));
+    }).select("fromUserId toUserId");
 
     const hideusersFormFeed = new Set ();
     connectionsRequests.forEach((req) => {
-      hideusersFormFeed.add(req.fromUserid.toString());
+      hideusersFormFeed.add(req.fromUserId.toString());
       hideusersFormFeed.add(req.toUserId.toString());
     })
     console.log(hideusersFormFeed);
@@ -87,6 +89,8 @@ userRouter.get("/user/feed",userAuth, async (req, res) => {
       {_id : { $ne : loggedInUser._id}},
       ],
     });
+
+    res.send(users);
 
     // const connectionsPendings =
     // const connectionsAccepted =

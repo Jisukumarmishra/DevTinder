@@ -5,12 +5,12 @@ const requestRouter = express.Router();
 const User  = require("../models/user");
 
 
-requestRouter.post("/sendConnectionRequest", userAuth, async(req, res) => {
-  const user = req.user;
-  // sending a connection request
-  console.log("Sending a Connections Request");
-  res.send(user.firstName +  "sent the connection request");
-});
+// requestRouter.post("/sendConnectionRequest", userAuth, async(req, res) => {
+//   const user = req.user;
+//   // sending a connection request
+//   console.log("Sending a Connections Request");
+//   res.send(user.firstName +  "sent the connection request");
+// });
 
 
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
