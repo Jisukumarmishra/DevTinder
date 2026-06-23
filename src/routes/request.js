@@ -31,7 +31,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 
   const existingConnectionRequest = await ConnectionRequest.findOne({
     $or :[
-      {fromUserId : toUserId},
+      {fromUserId, toUserId},
       {fromUserId : toUserId, toUserId : fromUserId},
     ],
   });
