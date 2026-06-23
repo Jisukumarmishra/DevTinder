@@ -70,9 +70,16 @@ userRouter.get("/user/feed",userAuth, async (req, res) => {
     const connectionsRequests = await ConnectionRequestModel.find({
       $or: [
         {fromUserId : loggedInUser._id},
-        {toUserId : loggedInUser._id}
+        {toUserId : loggedInUser._id},
       ]
+    }.select("fromUserid toUserId"));
+
+    const hideusersFormFeed = new Set ();
+    connectionsRequests.forEach((req) => {
+      
     })
+    // const connectionsPendings =
+    // const connectionsAccepted =
 
   } catch (err) {
     res.status(400).send("ERROR : " + err.message);
