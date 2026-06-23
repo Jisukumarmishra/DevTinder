@@ -79,6 +79,8 @@ userRouter.get("/user/feed",userAuth, async (req, res) => {
       hideusersFormFeed.add(req.fromUserid.toString());
       hideusersFormFeed.add(req.toUserId.toString());
     })
+    console.log(hideusersFormFeed);
+    
     // const connectionsPendings =
     // const connectionsAccepted =
 
