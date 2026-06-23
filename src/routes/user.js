@@ -64,9 +64,13 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 });
 
 
-userRouter.get("/user/feed",userAuth, async (req, res) => {
+userRouter.get("/feed",userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
+
+    // read the query param from the feed
+    const page = parseInt(req.params.page) || 1;
+    const limit = parseInt(req.params.limit) || 10;
 
     // find all the connectionsRequest (send + received) for the loggedInUser
     const connectionsRequests = await ConnectionRequestModel.find({
