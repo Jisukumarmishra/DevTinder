@@ -9,7 +9,10 @@ require("dotenv").config();
 const {userAuth} = require("./middlewares/auth");
 
 const app = express() // instaces of express 
+const cors = require('cors')
 
+
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
