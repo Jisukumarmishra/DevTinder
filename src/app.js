@@ -11,10 +11,10 @@ const {userAuth} = require("./middlewares/auth");
 const app = express() // instaces of express 
 const cors = require('cors')
 
-
+// Add A Cors MiddleWare With Origin And Credentials To Solve The Cors And Cokkies Token Problem
 app.use(cors({
   origin : "http://localhost:5173",
-  credentials : true,
+  credentials : true, // setup credential in backend
 }));
 app.use(express.json());
 app.use(cookieParser());
