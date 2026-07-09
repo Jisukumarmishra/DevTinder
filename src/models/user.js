@@ -47,8 +47,9 @@ const userSchema = new mongoose.Schema({
 
   gender : {
     type : String,
+    lowercase : true,
     enum : {
-      values: ["male", "female", " others"],
+      values: ["male", "female", "others"],
       message: `{VALUE} is not a valid gender type`,
     },
     // validate(value) {
@@ -61,7 +62,7 @@ const userSchema = new mongoose.Schema({
 
   photoUrl : {
     type : String,
-    default : "https://example.com/photo.jpg",
+    default : "https://www.gravatar.com/avatar/?d=mp&s=400",
     validate(value) {
      if (!validator.isURL(value)){
       throw new Error("Invalid URL Address" + value)

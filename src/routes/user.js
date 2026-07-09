@@ -88,7 +88,7 @@ userRouter.get("/feed",userAuth, async (req, res) => {
       hideusersFormFeed.add(req.fromUserId.toString());
       hideusersFormFeed.add(req.toUserId.toString());
     })
-    console.log(hideusersFormFeed);
+    // console.log(hideusersFormFeed);
 
     const users = await User.find({
       $and : [
