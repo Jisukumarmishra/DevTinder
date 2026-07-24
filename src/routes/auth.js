@@ -25,8 +25,13 @@ const user =  new User({
   passWord: passwordHash
 });
 
- await user.save();
- res.send("user addeded succesfully ");
+ const savedUser = await user.save();
+ const token = await savedUser.getJWT();
+
+ res.cookie("token", token, {
+   expires: new Date (Date.now() + 8 * 3600000),
+ })
+ res.json({message : "user addeded succesfully ", data : savedUser});
 }
 catch (err) {
   res.status(400).send("ERROR: "+ err.message);

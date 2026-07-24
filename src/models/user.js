@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema({
 
   photoUrl : {
     type : String,
-    default : "https://www.gravatar.com/avatar/?d=mp&s=400",
+    default : "https://img.magnific.com/free-vector/user-circles-set_78370-4704.jpg?semt=ais_hybrid",
     validate(value) {
      if (!validator.isURL(value)){
       throw new Error("Invalid URL Address" + value)
