@@ -13,6 +13,9 @@ const User  = require("../models/user");
 // });
 
 
+const {sendEmail} = require("../utils/sendEmail");
+
+
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   try {
    const fromUserId = req.user._id;
@@ -51,6 +54,9 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 
   // save connectionRequestData in the database
   const data = await connectionRequest.save();
+
+  const emailRes = await sendEmail.run();
+  console.log(emailRes);
 
   res.json({
   message :req.user.firstName + " is " + status + " in " + toUser.firstName,
