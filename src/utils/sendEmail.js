@@ -20,7 +20,8 @@ const createSendEmailCommand = (toAddress, fromAddress,subject, body) => {
         /* required */
         Html: {
           Charset: "UTF-8",
-          Data: `<h1>${body}</h1>`,
+          // Data: `<h1>${body}</h1>`, // not using this because body already Contains HTML
+          Data: body,
         },
         Text: {
           Charset: "UTF-8",
@@ -43,12 +44,21 @@ const createSendEmailCommand = (toAddress, fromAddress,subject, body) => {
 const run = async (subject, body) => {
   // console.log("sendEmail function started");
   // console.log("SES CLIENT:", sesClient);
+
+      console.log("SUBJECT:", subject);
+    console.log("BODY:", body);
+    console.log("BODY TYPE:", typeof body);
   const sendEmailCommand = createSendEmailCommand(
     "jisuk138@gmail.com",
     "Jisu@devtinder.jisukumar.in",
     subject,
     body,
+
   );
+
+    console.log("EMAIL COMMAND:",
+        JSON.stringify(sendEmailCommand.input, null, 2)
+    );
 
   try {
     return await sesClient.send(sendEmailCommand);
@@ -58,6 +68,7 @@ const run = async (subject, body) => {
       const messageRejectedError = caught;
       return messageRejectedError;
     }
+      console.log("SES ERROR:", caught);
     throw caught;
   }
 };

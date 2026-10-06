@@ -26,7 +26,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
   
   const allowedStatus = ["ignored", "interested"];
   if(!allowedStatus.includes(status)) {
-    return res.status(400).json({message :"Invalid Status Type: "} + status);
+    return res.status(400).json({message :"Invalid Status Type:" + status});
   } 
 
   const toUser = await User.findById(toUserId);
@@ -59,11 +59,32 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 
   // console.log("BEFORE RUN:", sendEmail);
 
-const emailRes = await sendEmail.run(
-    "New Friend Request",
-    `A New Friend Request from ${req.user.firstName} is ${status} in ${toUser.firstName}`
-);
+// const emailRes = await sendEmail.run(
+//     "New Friend Request",
+//     `A New Friend Request from ${req.user.firstName} is ${status} in ${toUser.firstName}`
+// );
   // console.log(emailRes);
+
+
+  const emailRes = await sendEmail.run(
+    `New connection request from ${req.user.firstName}`,
+    `
+        <h2>Hello ${toUser.firstName} 👋</h2>
+
+        <p>
+            <strong>${req.user.firstName}</strong>
+            has sent you a connection request on DevTinder.
+        </p>
+
+        <p>
+            Status: <strong>${status}</strong>
+        </p>
+
+        <p>
+            Please login to DevTinder to review the request.
+        </p>
+    `
+);
 
   res.json({
   message :req.user.firstName + " is " + status + " in " + toUser.firstName,
