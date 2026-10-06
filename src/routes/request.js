@@ -13,7 +13,9 @@ const User  = require("../models/user");
 // });
 
 
-const {sendEmail} = require("../utils/sendEmail");
+const sendEmail = require("../utils/sendEmail");
+// console.log("SEND EMAIL MODULE:", sendEmail);
+
 
 
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
@@ -55,8 +57,13 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
   // save connectionRequestData in the database
   const data = await connectionRequest.save();
 
-  const emailRes = await sendEmail.run();
-  console.log(emailRes);
+  // console.log("BEFORE RUN:", sendEmail);
+
+const emailRes = await sendEmail.run(
+    "New Friend Request",
+    `A New Friend Request from ${req.user.firstName} is ${status} in ${toUser.firstName}`
+);
+  // console.log(emailRes);
 
   res.json({
   message :req.user.firstName + " is " + status + " in " + toUser.firstName,
