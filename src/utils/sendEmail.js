@@ -45,9 +45,9 @@ const run = async (subject, body) => {
   // console.log("sendEmail function started");
   // console.log("SES CLIENT:", sesClient);
 
-      console.log("SUBJECT:", subject);
-    console.log("BODY:", body);
-    console.log("BODY TYPE:", typeof body);
+    //   console.log("SUBJECT:", subject);
+    // console.log("BODY:", body);
+    // console.log("BODY TYPE:", typeof body);
   const sendEmailCommand = createSendEmailCommand(
     "jisuk138@gmail.com",
     "Jisu@devtinder.jisukumar.in",
@@ -56,9 +56,9 @@ const run = async (subject, body) => {
 
   );
 
-    console.log("EMAIL COMMAND:",
-        JSON.stringify(sendEmailCommand.input, null, 2)
-    );
+    // console.log("EMAIL COMMAND:",
+    //     JSON.stringify(sendEmailCommand.input, null, 2)
+    // );
 
   try {
     return await sesClient.send(sendEmailCommand);
