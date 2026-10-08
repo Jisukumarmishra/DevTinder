@@ -18,6 +18,8 @@ cron.schedule("0 8 * * *", () => {
         $lt:yesterdayEnd,
       },
     }).populate("fromUserId toUserId");
+
+    const listOfEmails = new Set(pendingRequests.map(req => req.toUserId.emailId))
     
     
 
