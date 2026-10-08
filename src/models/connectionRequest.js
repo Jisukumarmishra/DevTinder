@@ -38,4 +38,4 @@ connectionRequestSchema.pre("save", function ()  {
 });
 
 const ConnectionRequestModel = new mongoose.model("connectionRequest", connectionRequestSchema);
-module.exports = ConnectionRequestModel
+module.exports = ConnectionRequestModel;
