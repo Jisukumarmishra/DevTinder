@@ -22,7 +22,7 @@ cron.schedule("38 16 * * *", async () => {
     }).populate("fromUserId toUserId");
 
     const listOfEmails = [...new Set(pendingRequests.map(req => req.toUserId.emailId))];
-    console.log(listOfEmails);
+    // console.log(listOfEmails);
 
 
     for( const email of listOfEmails) {
@@ -32,7 +32,7 @@ cron.schedule("38 16 * * *", async () => {
           "New Friend Request pending For " + email,
           "there are so many friend request that are pending please login to devtinder.jisukumar.in and accept or reject the request."
         );
-      console.log(res);
+      // console.log(res);
       } catch(err) {
         console.log(err);
       }
@@ -42,3 +42,13 @@ cron.schedule("38 16 * * *", async () => {
   console.error(err);
   }
 })
+
+
+// if there is millions or lakhs of user in the devtinder.com or eg:- facebook.com then sending the email like this 
+// failed sure beacuse here we do for loop and then sending the email individually. also some time 
+// pendingRequests this query may be very expensive or take to much time.
+
+// for resolve this there is varous way 
+// 1) using queuing(creating own quue in the nodejs process and send inside batches) using beque or bull node packarge :-- this is also called batch processing
+// 2) send then into bulk operations ans ses manage things (send bulk operations to amazon ses they will handle for you )
+// 3) query is paginated
