@@ -9,15 +9,19 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
  // here we will write our api code below that
  
  try {
+
+  const {memberShipType} = req.body;
+  const {firstName, lastName, emailId} = req.user;
   // this is making call to rajorPy instanse
   const order = await razorpayInstance.orders.create({
-  "amount": 50000, // means 500 rupees
-  "currency": "INR",
-  "receipt": "receipt#1",
-  "notes": {
-    "firstName": "value3",
-    "lastName": "value2",
-    "memberShipType": "silver"
+  amount: 50000, // means 500 rupees
+  currency: "INR",
+  receipt: "receipt#1",
+  notes: {
+    firstName,
+    lastName,
+    emailId,
+    memberShipType: memberShipType
   },
   }) ;
     // save it to my database
