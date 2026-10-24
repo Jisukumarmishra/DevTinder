@@ -2,7 +2,7 @@ const express = require('express');
 const { userAuth } = require('../middlewares/auth');
 const paymentRouter = express.Router();
 const razorpayInstance = require("../utils/razorpay");
-
+const Payment = require("../models/payment");
 
 // creaing a post api for creating an order
 paymentRouter.post("/payment/create", userAuth , async (req, res) => {
@@ -21,9 +21,24 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
   },
   }) ;
     // save it to my database
+    const payment = new Payment({
+      userId : req.user._id,
+      orderId : order.id,
+      status : order.status,  
+      amount : order.amount,
+      currency : order.currency,
+      receipt : order.receipt,
+      notes : {
+        firstName : order.notes.firstName,
+        lastName : order.notes.lastName,      
+        memberShipType : order.notes.memberShipType,
+      }
+    });
+
+    const savepayment = await payment.save();
 
   // return back my order details to fronted
-  res.json({order}); 
+  res.json({...savepayment.toJSON(),}); 
 
  } catch (err) {
   console.log(err);
