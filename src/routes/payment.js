@@ -3,6 +3,7 @@ const { userAuth } = require('../middlewares/auth');
 const paymentRouter = express.Router();
 const razorpayInstance = require("../utils/razorpay");
 const Payment = require("../models/payment");
+const { memeberShipAmount } = require('../utils/constants');
 
 // creaing a post api for creating an order
 paymentRouter.post("/payment/create", userAuth , async (req, res) => {
@@ -14,7 +15,7 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
   const {firstName, lastName, emailId} = req.user;
   // this is making call to rajorPy instanse
   const order = await razorpayInstance.orders.create({
-  amount: 50000, // means 500 rupees
+  amount: memeberShipAmount[memberShipType] * 100 , // means 500 rupees
   currency: "INR",
   receipt: "receipt#1",
   notes: {
