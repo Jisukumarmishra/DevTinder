@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const connectDB = require("./config/database");
 const user = require("./models/user");
@@ -5,11 +7,11 @@ const validator = require("validator");
 
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 require("./utils/cronjobs");
 const {userAuth} = require("./middlewares/auth");
 const app = express() // instaces of express 
 const cors = require('cors')
+
 
 
 // Add A Cors MiddleWare With Origin And Credentials To Solve The Cors And Cokkies Token Problem
@@ -24,11 +26,13 @@ const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
 const requestRouter = require('./routes/request');
 const userRouter = require("./routes/user");
+const paymentRouter = require("./routes/payment");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
+app.use("/", paymentRouter);
 
 
 
