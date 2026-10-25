@@ -15,7 +15,7 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
   const {firstName, lastName, emailId} = req.user;
   // this is making call to rajorPy instanse
   const order = await razorpayInstance.orders.create({
-  amount: memeberShipAmount[memberShipType] * 100 , // means 500 rupees
+  amount: memeberShipAmount[memberShipType] * 100,
   currency: "INR",
   receipt: "receipt#1",
   notes: {
@@ -26,6 +26,8 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
   },
   }) ;
     // save it to my database
+    // console.log(order);
+    
     const payment = new Payment({
       userId : req.user._id,
       orderId : order.id,
@@ -43,7 +45,7 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
     const savepayment = await payment.save();
 
   // return back my order details to fronted
-  res.json({...savepayment.toJSON(),}); 
+  res.json({...savepayment.toJSON(), keyId: process.env.RAZORPAY_KEY_ID}); 
 
  } catch (err) {
   console.log(err);

@@ -39,6 +39,9 @@ const paymentSchema = new mongoose.Schema({
       type : String, 
   
     },
+    emailId : {
+      type : String,
+    },
     memberShipType : {
       type : String, 
      
