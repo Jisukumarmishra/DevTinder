@@ -4,6 +4,7 @@ const paymentRouter = express.Router();
 const razorpayInstance = require("../utils/razorpay");
 const Payment = require("../models/payment");
 const { memeberShipAmount } = require('../utils/constants');
+const {validateWebhookSignature} = require('razorpay/dist/utils/razorpay-utils')
 
 // creaing a post api for creating an order
 paymentRouter.post("/payment/create", userAuth , async (req, res) => {
@@ -59,6 +60,9 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 
 paymenRouter.post("/paymnet/webhook", async (req, res) => {
   try {
+   
+    validateWebhookSignature(JSON.stringify(webhookBody), webhookSignature, webhookSecret)
+#webhook_body should be raw webhook request body
 
   } catch (err) {
     console.log(err);
