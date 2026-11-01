@@ -54,4 +54,16 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 
 })
 
+//creating a webhool api for payment verification
+// it is a post api because razorpay will send some data also in the body of the request
+
+paymenRouter.post("/paymnet/webhook", async (req, res) => {
+  try {
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({msg: err.message});
+  }
+})
+
 module.exports = paymentRouter;
