@@ -62,7 +62,6 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   try {
    
     validateWebhookSignature(JSON.stringify(webhookBody), webhookSignature, webhookSecret)
-#webhook_body should be raw webhook request body
 
   } catch (err) {
     console.log(err);
