@@ -60,10 +60,13 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 
 paymenRouter.post("/paymnet/webhook", async (req, res) => {
   try {
-    const webhookSignature = req.headers['x-Razorpay-Signature'];
+    const webhookSignature = req.get['x-Razorpay-Signature'];
    
-    validateWebhookSignature(JSON.stringify(req.body), webhookSignature, process.env.RAZORPAY_WEBHOOK_SECRET)
-
+  const isWebhookValid = validateWebhookSignature(JSON.stringify(req.body), webhookSignature, process.env.RAZORPAY_WEBHOOK_SECRET)
+  
+  if(!isWebhookValid) {
+    return res.status(400).json({msg: "Invalid webhook signature"});
+  }
   } catch (err) {
     console.log(err);
     return res.status(500).json({msg: err.message});
