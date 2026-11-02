@@ -8,4 +8,8 @@ Type of the data user add, and fetch
 in post add all checks , data validations, data sanetization etc before the connectionRequest.save();
 To GET api We Making Sure To We Are Sending Allowed Data
 
-WebHook URL :- What Api Should API Call, If a Payment is Successful Or Failed.
+WebHook URL :- What Api Should RazorPay Call, If a Payment is Successful Or Failed.
+
+A Webhook is a way for one application to automatically send data to another application whenever a specific event occurs.
+
+In simple words, instead of continuously checking whether something has happened, a webhook automatically notifies your application when an event occurs.

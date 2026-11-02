@@ -67,6 +67,20 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   if(!isWebhookValid) {
     return res.status(400).json({msg: "Invalid webhook signature"});
   }
+  
+  // now webhook is validate , now we validate the signature of the payment
+  // req.body gives the access to a event object
+
+   if (req.body.event === "payment.captured") {
+
+   }
+
+   if (req.body.event === "payment.failed") {
+    
+   }
+
+
+
   } catch (err) {
     console.log(err);
     return res.status(500).json({msg: err.message});
