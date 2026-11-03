@@ -73,6 +73,7 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
    
   
   // update My Payment Status In DB
+   const paymentDetails = req.body.payload.payment.entity;
   const payment = await Payment.findOne() 
     
   // Update The User As Premium
