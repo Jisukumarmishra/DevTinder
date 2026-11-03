@@ -55,7 +55,7 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 
 })
 
-//creating a webhool api for payment verification
+//creating a webhook api for payment verification
 // it is a post api because razorpay will send some data also in the body of the request
 
 paymenRouter.post("/paymnet/webhook", async (req, res) => {
@@ -73,8 +73,8 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
    
   
   // update My Payment Status In DB
-   const paymentDetails = req.body.payload.payment.entity;
-  const payment = await Payment.findOne() 
+  const paymentDetails = req.body.payload.payment.entity;
+  const payment = await Payment.findOne({orderId: paymentDetails.order_id}) 
     
   // Update The User As Premium
   // return success response to razorpay
