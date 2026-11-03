@@ -75,6 +75,7 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   // update My Payment Status In DB
   const paymentDetails = req.body.payload.payment.entity;
   const payment = await Payment.findOne({orderId: paymentDetails.order_id}) 
+  payment.status = paymentDetails.status;
     
   // Update The User As Premium
   // return success response to razorpay
