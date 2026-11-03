@@ -89,13 +89,13 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   // return success response to razorpay
 
   return res.status(200).json
-   if (req.body.event === "payment.captured") {
+  //  if (req.body.event === "payment.captured") {
 
-   }
+  //  }
 
-   if (req.body.event === "payment.failed") {
+  //  if (req.body.event === "payment.failed") {
     
-   }
+  //  }
 
 
 
