@@ -3,6 +3,7 @@ const { userAuth } = require('../middlewares/auth');
 const paymentRouter = express.Router();
 const razorpayInstance = require("../utils/razorpay");
 const Payment = require("../models/payment");
+const User = require("../models/user");
 const { memeberShipAmount } = require('../utils/constants');
 const {validateWebhookSignature} = require('razorpay/dist/utils/razorpay-utils')
 
@@ -77,6 +78,11 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   const payment = await Payment.findOne({orderId: paymentDetails.order_id}) 
   payment.status = paymentDetails.status;
   await payment.save();
+
+  const user = await User.findOne({_id:payment.userId});
+  user.isPremium = true;
+  user.memberShipType = payment.notes.memberShipType;
+  user.memberShipValidity = new Date(Date.now() + 30*24*60*60*1000); // 30 days from now
     
   // Update The User As Premium
   // return success response to razorpay
