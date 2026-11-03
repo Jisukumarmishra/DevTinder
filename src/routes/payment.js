@@ -59,7 +59,7 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 //creating a webhook api for payment verification
 // it is a post api because razorpay will send some data also in the body of the request
 
-paymenRouter.post("/paymnet/webhook", async (req, res) => {
+paymentRouter.post("/paymnet/webhook", async (req, res) => {
   try {
     const webhookSignature = req.get['x-Razorpay-Signature'];
    
