@@ -83,6 +83,7 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   user.isPremium = true;
   user.memberShipType = payment.notes.memberShipType;
   user.memberShipValidity = new Date(Date.now() + 30*24*60*60*1000); // 30 days from now
+  await user.save();
     
   // Update The User As Premium
   // return success response to razorpay
