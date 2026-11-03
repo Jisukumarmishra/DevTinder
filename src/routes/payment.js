@@ -70,7 +70,13 @@ paymenRouter.post("/paymnet/webhook", async (req, res) => {
   
   // now webhook is validate , now we validate the signature of the payment
   // req.body gives the access to a event object
+   
+  
+  // update My Payment Status In DB
+  // Update The User As Premium
+  // return success response to razorpay
 
+  return res.status(200).json
    if (req.body.event === "payment.captured") {
 
    }
