@@ -11,6 +11,7 @@ require("./utils/cronjobs");
 const {userAuth} = require("./middlewares/auth");
 const app = express() // instaces of express 
 const cors = require('cors')
+const User = require("./models/user");
 
 
 
