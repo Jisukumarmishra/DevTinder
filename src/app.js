@@ -19,6 +19,11 @@ app.use(cors({
   origin : "http://localhost:5173",
   credentials : true, // setup credential in backend
 }));
+// Razorpay Webhook - Must come before express.json()
+app.use(
+  "/payment/payment/webhook",
+  express.raw({ type: "application/json" })
+);
 app.use(express.json());
 app.use(cookieParser());
 
