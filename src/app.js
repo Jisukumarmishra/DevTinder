@@ -22,10 +22,10 @@ app.use(cors({
 }));
 
 // Razorpay Webhook - Must come before express.json()
-// app.use(
-//   "/api/payment/webhook",
-//   express.raw({ type: "application/json" })
-// );
+app.use(
+  "/payment/webhook",
+  express.raw({ type: "application/json" })
+);
 app.use(express.json()); // Converts JSON request body into a JavaScript object.
 app.use(cookieParser());
 
