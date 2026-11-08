@@ -61,10 +61,10 @@ const userSchema = new mongoose.Schema({
       type: String,
       default: "free",
     },
-    memberShipValidity: {
-      type: Date,
-      default: null,
-    },
+    // memberShipValidity: {
+    //   type: Date,
+    //   default: null,
+    // },
     // validate(value) {
     //   if(!["male", "female", "others"].includes(value)) {
     //     throw new Error ("Gender Data Is Not Valid")

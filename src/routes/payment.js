@@ -62,9 +62,8 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 paymentRouter.post("/payment/webhook", async (req, res) => {
   try {
 
-  const webhookSignature = req.get('x-razorpay-signature'); 
-  const rawBody = req.body.toString("utf8");
-  const isWebhookValid = validateWebhookSignature(rawBody, 
+  const webhookSignature = req.get('X-Razorpay-Signature'); 
+  const isWebhookValid = validateWebhookSignature(JSON.stringify(req.body), 
   webhookSignature,
   process.env.RAZORPAY_WEBHOOK_SECRET)
   
@@ -85,13 +84,13 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
   const user = await User.findOne({_id:payment.userId});
   user.isPremium = true;
   user.memberShipType = payment.notes.memberShipType;
-  user.memberShipValidity = new Date(Date.now() + 30*24*60*60*1000); // 30 days from now
+  // user.memberShipValidity = new Date(Date.now() + 30*24*60*60*1000); // 30 days from now
   await user.save();
     
   // Update The User As Premium
   // return success response to razorpay
 
-  return res.status(200).json
+  return res.status(200).json({msg: "Webhook reveived successfully"});
   //  if (req.body.event === "payment.captured") {
 
   //  }
