@@ -47,7 +47,7 @@ app.use("/", paymentRouter);
 // make an api to get the one user data from the database
 //get user by email
 app.get("/user", async (req, res) => {
-  const userEmail = req.body.emailId; // reading the body of the email id from the email that you getting
+  const userEmail = req.query.emailId; // reading the body of the email id from the email that you getting
 
   try {
     console.log(userEmail)
