@@ -21,6 +21,8 @@ app.use(cors({
   credentials : true, // setup credential in backend
 }));
 
+app.use("/payment/webhook", express.raw({ type: "application/json" }));
+
 app.use(express.json()); // Converts JSON request body into a JavaScript object.
 app.use(cookieParser());
 
