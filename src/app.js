@@ -120,7 +120,7 @@ app.delete("/user", async (req, res) => {
   // const user = await User.findByIdAndDelete(userId)
   res.send("User Deleted Succesfully")
   } catch (err) {
-    req.status(400).send("Something Went Wrong")
+    res.status(400).send("Something Went Wrong")
   }
 })
 

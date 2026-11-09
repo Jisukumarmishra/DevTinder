@@ -52,25 +52,21 @@ const userSchema = new mongoose.Schema({
       values: ["male", "female", "others"],
       message: `{VALUE} is not a valid gender type`,
     },
-
-    isPremium: {
-      type: Boolean,
-      default: false,
-    },
-    memberShipType: {
-      type: String,
-      default: "free",
-    },
-    // memberShipValidity: {
-    //   type: Date,
-    //   default: null,
-    // },
-    // validate(value) {
-    //   if(!["male", "female", "others"].includes(value)) {
-    //     throw new Error ("Gender Data Is Not Valid")
-    //   }
-    // },
+  
   },
+  
+  isPremium: {
+  type: Boolean,
+  default: false,
+},
+
+
+memberShipType: {
+  type: String,
+  default: "free",
+},
+
+  
 
 
   photoUrl : {
@@ -97,6 +93,8 @@ const userSchema = new mongoose.Schema({
 },{
   timestamps : true
 });
+
+
 
 userSchema.methods.getJWT = async function () { // this is never working if we use arrow function due to internal implementations of arrow fumctions
   const user = this 
