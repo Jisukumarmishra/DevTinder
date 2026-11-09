@@ -62,7 +62,9 @@ paymentRouter.post("/payment/create", userAuth , async (req, res) => {
 
 paymentRouter.post("/payment/webhook", async (req, res) => {
   try {
-  const webhookSignature = req.get('X-Razorpay-Signature'); 
+    console.log("Webhook Received:", req.body);
+  const webhookSignature = req.get('X-Razorpay-Signature');
+  console.log("Webhook Signature:", webhookSignature); 
 
   const isWebhookValid = validateWebhookSignature(JSON.stringify(req.body), 
   webhookSignature,
@@ -82,18 +84,18 @@ paymentRouter.post("/payment/webhook", async (req, res) => {
   payment.status = paymentDetails.status;
   await payment.save();
 
-  // const user = await User.findOne({_id:payment.userId});
-  // user.isPremium = true;
-  // user.memberShipType = payment.notes.memberShipType;
-  // // user.memberShipValidity = new Date(Date.now() + 30*24*60*60*1000); // 30 days from now
-  // await user.save();
-
-  if (req.body.event === "payment.captured") {
-  const user = await User.findOne({ _id: payment.userId });
+  const user = await User.findOne({_id:payment.userId});
   user.isPremium = true;
   user.memberShipType = payment.notes.memberShipType;
+  // user.memberShipValidity = new Date(Date.now() + 30*24*60*60*1000); // 30 days from now
   await user.save();
-}
+
+//   if (req.body.event === "payment.captured") {
+//   const user = await User.findOne({ _id: payment.userId });
+//   user.isPremium = true;
+//   user.memberShipType = payment.notes.memberShipType;
+//   await user.save();
+// }
     
 
 
