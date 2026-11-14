@@ -172,7 +172,7 @@ app.patch("/user/:userId", async (req, res) => {
 connectDB()
 .then(() => {
   console.log("DataBase Connecton Estbalished...");
-  app.listen(3000, () => {
+  server.listen(3000, () => {
   console.log("Sever is Succesfully Listening on port 3000...");
 });
 })
