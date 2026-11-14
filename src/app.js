@@ -4,6 +4,7 @@ const express = require("express");
 const connectDB = require("./config/database");
 const user = require("./models/user");
 const validator = require("validator");
+const http = require("http");
 
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
@@ -37,6 +38,8 @@ app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
 app.use("/", paymentRouter);
+
+const server = http.createServer(app);
 
 
 
