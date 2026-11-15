@@ -16,11 +16,13 @@ const intializeSocket = (server) => {
 
  socket.on("sendMessage", () => {
 
- }):
+ });
 
  socket.on("disconnect", () => {
 
- }):
+ });
+
 })
+}
 
 module.exports = intializeSocket;
