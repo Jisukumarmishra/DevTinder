@@ -32,6 +32,7 @@ const profileRouter = require('./routes/profile');
 const requestRouter = require('./routes/request');
 const userRouter = require("./routes/user");
 const paymentRouter = require("./routes/payment");
+const intializeSocket = require("./utils/socket");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
@@ -40,6 +41,7 @@ app.use("/", userRouter);
 app.use("/", paymentRouter);
 
  const server = http.createServer(app);
+ intializeSocket(server) // calling the socket function and passing the server instance to it
 
 // make an api to get the one user data from the database
 //get user by email

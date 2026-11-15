@@ -9,9 +9,18 @@ const intializeSocket = (server) => {
  })
  
  io.on("connection", (socket) => {
-   // handle events 
+  // handle events 
+  socket.on("joinChat", () => {
+    console.log("User Joined the Chat");
  });
 
-}
+ socket.on("sendMessage", () => {
+
+ }):
+
+ socket.on("disconnect", () => {
+
+ }):
+})
 
 module.exports = intializeSocket;
