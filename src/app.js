@@ -39,10 +39,7 @@ app.use("/", requestRouter);
 app.use("/", userRouter);
 app.use("/", paymentRouter);
 
-const server = http.createServer(app);
-
-
-
+ const server = http.createServer(app);
 
 // make an api to get the one user data from the database
 //get user by email
@@ -172,7 +169,7 @@ app.patch("/user/:userId", async (req, res) => {
 connectDB()
 .then(() => {
   console.log("DataBase Connecton Estbalished...");
-  server.listen(3000, () => {
+  server.listen(process.env.SERVER_PORT, () => {
   console.log("Sever is Succesfully Listening on port 3000...");
 });
 })
