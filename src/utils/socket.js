@@ -10,9 +10,13 @@ const intializeSocket = (server) => {
  
  io.on("connection", (socket) => {
   // handle events 
-  socket.on("joinChat", () => {
-    console.log("User Joined the Chat");
- });
+  socket.on("joinChat", ({userId, targetUserId}) => {
+    // now creating a room for individuals peoples
+    // whenver a chat is happen that happens inside the room and in that room there is some participant
+    const room  = "uniqueId";
+    socket.join(room);
+   
+  });
 
  socket.on("sendMessage", () => {
 
