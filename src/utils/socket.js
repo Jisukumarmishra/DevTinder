@@ -13,8 +13,9 @@ const intializeSocket = (server) => {
   socket.on("joinChat", ({userId, targetUserId}) => {
     // now creating a room for individuals peoples
     // whenver a chat is happen that happens inside the room and in that room there is some participant
-    const room  = "uniqueId";
-    socket.join(room);
+    const roomId  = [userId, targetUserId].join("_");
+    console.log("Joining Room : " + roomId)
+    socket.join(roomId);
    
   });
 
