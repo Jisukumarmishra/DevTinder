@@ -20,6 +20,9 @@ const intializeSocket = (server) => {
   });
 
  socket.on("sendMessage", ({ firstName,userId, targetUserId,message } ) => {
+
+  // now whetever message we got from the client we have to send to the room that we create 
+  const roomId = [userId, targetUserId].sort().join("_");
   
  });
 
