@@ -1,4 +1,9 @@
 const socket = require("socket.io");
+const crypto = require("crypto");
+
+const getSecretRoomId = (userId, targetUserId ) => {
+ return crypto.createHash("sha256").update([userId, targetUserId].sort().join("_")).digest("hex");
+}
 
 const intializeSocket = (server) => {
 
@@ -12,10 +17,8 @@ const intializeSocket = (server) => {
   // handle events 
   console.log("User Connected", socket.id)
   socket.on("joinChat", ({firstName, userId, targetUserId}) => {
-    // now creating a room for individuals peoples
-    // whenver a chat is happen that happens inside the room and in that room there is some participant
-    const roomId  = [userId, targetUserId].sort().join("_"); // room id should be same for the two people talk with each others show we do short
-    console.log(firstName + " Joining Room : " + roomId)
+    const roomId  = getSecretRoomId(userId, targetUserId); 
+      console.log(firstName + "Join the Room " + roomId )
     socket.join(roomId);
    
   });
@@ -23,9 +26,9 @@ const intializeSocket = (server) => {
  socket.on("sendMessage", ({ firstName,userId, targetUserId,text } ) => {
 
   // now whetever message we got from the client we have to send to the room that we create 
-  const roomId = [userId, targetUserId].sort().join("_");
-  console.log(firstName + " " + text);
-  io.to(roomId).emit("messageReceived", {firstName, text});
+  const roomId = getSecretRoomId(userId, targetUserId);
+  // console.log(firstName + " " + text);
+  io.to(roomId).emit("messageReceived", {firstName, text}); // emiting the messageReceives event form here that we listen on the client side
   
  });
 
