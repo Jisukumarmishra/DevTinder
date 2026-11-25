@@ -1,13 +1,23 @@
 const express = require("express");
 
 const chatRouter = express.Router();
+const {userAuth} = require("../middlewares/auth");
 
-chatRouter.post("/chat", await (req, res) = {
- const {userId, targetUserId } = req.body;
+chatRouter.post("/chat", userAuth, async (req, res) => {
+ const { targetUserId } = req.body;
+ const userId = req.user._id;
  try {
   let chat = Chat.findOne({
     participants: { $all: [userId, targetUserId]}
-  })
+  });
+  if(!chat) {
+    chat = new Chat({
+      participants: [userId, targetUserId],
+      messages: [],
+    });
+    await chat.save();
+  }
+  res.json(chat);
  } catch (error) {
 
   console.error(error);
