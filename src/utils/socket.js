@@ -37,6 +37,14 @@ const intializeSocket = (server) => {
       })
     }
 
+    // now we have to push the message to the messages array of the chat
+    chat.messages.push({
+      senderId: userId,
+      text,
+    })
+
+    await chat.save();
+
   } catch (error) {
     console.log(error);
   }
