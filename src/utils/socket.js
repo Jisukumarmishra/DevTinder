@@ -24,7 +24,7 @@ const intializeSocket = (server) => {
   });
 
   
- socket.on("sendMessage", async ({ firstName,userId, targetUserId,text } ) => {
+ socket.on("sendMessage", async ({ firstName, lastName , userId, targetUserId,text } ) => {
   try {
     const roomId = getSecretRoomId(userId, targetUserId);
     let chat = await Chat.findOne({participants: {$all: [userId, targetUserId]}}); // find the chat between the two users
@@ -41,7 +41,7 @@ const intializeSocket = (server) => {
       text,
     })
     await chat.save();
-    io.to(roomId).emit("messageReceived", {firstName, text}); // emiting the messageReceives event form here that we listen on the client side
+    io.to(roomId).emit("messageReceived", {firstName,lastName, text}); // emiting the messageReceives event form here that we listen on the client side
   } catch (error) {
     console.log(error);
   }
