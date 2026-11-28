@@ -1,6 +1,7 @@
 const socket = require("socket.io");
 const crypto = require("crypto");
 const { Chat } = require("../models/chat");
+const ConnectionRequestModel = require("../models/connectionRequest");
 
 const getSecretRoomId = (userId, targetUserId ) => {
  return crypto.createHash("sha256").update([userId, targetUserId].sort().join("_")).digest("hex");
@@ -27,6 +28,14 @@ const intializeSocket = (server) => {
  socket.on("sendMessage", async ({ firstName, lastName , userId, targetUserId,text } ) => {
   try {
     const roomId = getSecretRoomId(userId, targetUserId);
+    // check if userId and targetUserId are friends
+
+    const isFriend = ConnectionRequestModel.findOne({
+    $or:[
+    {fromUserId: userId, toUserId: targetUserId, status: "accepted"},
+    {fromUserId: targetUserId, toUserId: userId, status: "accepted"},
+   ],
+  });
     let chat = await Chat.findOne({participants: {$all: [userId, targetUserId]}}); // find the chat between the two users
     if(!chat) {
       chat = new Chat({
